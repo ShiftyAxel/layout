@@ -412,7 +412,12 @@ enyo.kind({
 					n = inNew[i];
 					o = inOld[i];
 					if (n != o) {
-						b[i] = n - (n - o) * inFrac;
+						var val = n - (n - o) * inFrac;
+						//Strip e-notation if applicable
+						if (String(val).match("e"))
+							b[i] = val.toFixed(20);
+						else
+							b[i] = val;
 					}
 				}
 			}
